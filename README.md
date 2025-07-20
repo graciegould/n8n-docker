@@ -11,6 +11,9 @@ A Docker-based N8N setup with custom nodes and local-only data storage.
 ### Using Scripts (Recommended)
 
 ```bash
+# Development mode with hot reloading
+./scripts/dev.sh
+
 # Build and start everything
 ./scripts/start.sh
 
@@ -69,7 +72,19 @@ All N8N data (workflows, credentials, execution history) is stored locally in th
 
 ## 🛠️ Development
 
-### Custom Nodes
+### Development Mode (Recommended)
+```bash
+# Start development mode with "hot" reloading
+./scripts/dev.sh
+```
+
+This will:
+- Start the N8N container
+- Watch for changes in `custom/src/`
+- Automatically rebuild custom nodes using SWC
+- N8N will automatically reload custom nodes
+
+### Manual Custom Node Development
 1. Edit files in `custom/src/`
 2. Build with `npm run build` (in `custom/` directory)
 3. Restart container: `docker compose restart`
@@ -90,6 +105,12 @@ All N8N data (workflows, credentials, execution history) is stored locally in th
 ### `./scripts/stop.sh`
 - Stops Docker container
 - Cleans up resources
+
+### `./scripts/dev.sh`
+- Starts development mode with hot reloading
+- Watches for changes in custom nodes
+- Automatically rebuilds using SWC
+- Manages Docker container lifecycle
 
 ### `./scripts/build.sh`
 - Creates data directory

@@ -4,11 +4,14 @@
   "description": "Custom N8N nodes and extensions",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch",
+    "build": "gulp build",
+    "dev": "gulp dev",
+    "watch": "gulp dev",
+    "clean": "gulp clean",
     "test": "jest",
     "lint": "eslint src/**/*.ts",
-    "clean": "rm -rf dist"
+    "build:tsc": "tsc",
+    "dev:tsc": "tsc --watch"
   },
   "keywords": ["n8n", "custom-nodes", "workflow-automation"],
   "author": "",
@@ -19,8 +22,21 @@
     "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.0.0",
     "jest": "^29.0.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "@swc/cli": "^0.3.0",
+    "@swc/core": "^1.4.0",
+    "gulp": "^4.0.2",
+    "gulp-swc": "^1.0.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "del": "^6.1.1",
+    "nodemon": "^3.0.0"
   },
+  "n8n": {
+		"n8nNodesApiVersion": 1,
+		"nodes": [
+			"dist/index.js"
+		]
+	},
   "dependencies": {
     "n8n-workflow": "^1.0.0"
   }
