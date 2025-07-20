@@ -38,7 +38,7 @@ custom/
 
 ### Adding Custom Nodes
 
-1. Create a new node file in `src/nodes/`
+1. Create a new node file in `src/nodes/` with the extention .node.ts
 2. Export your node from `src/index.ts`
 3. Build the project
 4. Restart the N8N container

@@ -41,6 +41,7 @@ services:
       - ./data:/home/node/.n8n
       - ./custom:/home/node/.n8n/custom
       - ./.env:/home/node/custom/.env
+      - ./requirements.txt:/tmp/requirements.txt
     networks:
       - n8n-network
 

@@ -50,7 +50,9 @@ n8n-docker/
 ├── scripts/             # Build and management scripts
 │   ├── build.sh         # Full build process
 │   ├── start.sh         # Start with checks
-│   └── stop.sh          # Stop container
+│   ├── stop.sh          # Stop container
+│   ├── dev.sh           # Development mode with hot reload
+├── requirements.txt     # Python dependencies
 ├── docker-compose.yml   # Docker orchestration
 ├── Dockerfile           # Container configuration
 └── README.md           # This file
@@ -69,6 +71,18 @@ All N8N data (workflows, credentials, execution history) is stored locally in th
 - No cloud dependencies
 - Complete data privacy
 - Easy backup and migration
+
+### Python Dependencies
+Python and pip are installed in the container. Dependencies are managed via `requirements.txt`:
+- **BeautifulSoup4**: Web scraping and HTML parsing
+- **Requests**: HTTP library for API calls
+- **lxml**: Fast XML/HTML parser
+- **html5lib**: HTML5 parser
+
+To add new Python dependencies:
+1. Edit `requirements.txt`
+2. Rebuild the Docker image: `docker compose build --no-cache`
+3. Restart the container: `docker compose restart`
 
 ## 🛠️ Development
 
@@ -117,6 +131,11 @@ This will:
 - Installs and builds custom nodes
 - Builds Docker image
 - Sets proper permissions
+
+### `./scripts/test-python.sh`
+- Tests Python installation
+- Verifies BeautifulSoup and other dependencies
+- Shows installed package versions
 
 ## 🔒 Security
 
