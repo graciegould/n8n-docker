@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  n8n:
+    build: .
+    container_name: n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=password
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - NODE_ENV=development
+      - WEBHOOK_URL=http://localhost:5678/
+      - GENERIC_TIMEZONE=UTC
+      - N8N_CUSTOM_EXTENSIONS=/home/node/.n8n/custom
+      - N8N_DEV_RELOAD=true
+      # Disable cloud features for local-only storage
+      - N8N_DISABLE_TELEMETRY=true
+      - N8N_DISABLE_ONBOARDING_FLOW=true
+      - N8N_DISABLE_PERSONALIZATION=true
+      - N8N_DISABLE_SHARING=true
+      - N8N_DISABLE_PINNING=true
+      - N8N_DISABLE_ACTIVATION=true
+      - N8N_DISABLE_WORKFLOW_HISTORY=false
+      - N8N_DISABLE_EXECUTIONS=false
+      - N8N_DISABLE_EDITOR=false
+      - N8N_DISABLE_WEBHOOK_DEPLOYMENT=false
+      - N8N_DISABLE_UI=false
+      - N8N_DISABLE_PRODUCTION_MAIN_PROCESS=false
+      - N8N_DISABLE_CREDENTIALS_OVERWRITE=false
+      - N8N_DISABLE_NODES_ACCESS=false
+      - N8N_DISABLE_COMMUNITY_NODES=false
+    env_file:
+      - .env
+    volumes:
+      - ./data:/home/node/.n8n
+      - ./custom:/home/node/.n8n/custom
+      - ./.env:/home/node/custom/.env
+    networks:
+      - n8n-network
+
+networks:
+  n8n-network:
+    driver: bridge 
