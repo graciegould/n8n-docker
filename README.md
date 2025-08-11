@@ -20,6 +20,9 @@ A Docker-based N8N setup with custom nodes and local-only data storage.
 # Stop the container
 ./scripts/stop.sh
 
+# Clear database (removes all data)
+./scripts/clear-db.sh
+
 # Full rebuild
 ./scripts/build.sh
 ```
@@ -51,6 +54,7 @@ n8n-docker/
 │   ├── build.sh         # Full build process
 │   ├── start.sh         # Start with checks
 │   ├── stop.sh          # Stop container
+│   ├── clear-db.sh      # Clear database and data
 │   ├── dev.sh           # Development mode with hot reload
 ├── requirements.txt     # Python dependencies
 ├── docker-compose.yml   # Docker orchestration
@@ -132,6 +136,12 @@ This will:
 - Builds Docker image
 - Sets proper permissions
 
+### `./scripts/clear-db.sh`
+- Stops Docker container safely
+- Removes all local data (workflows, credentials, execution history)
+- Recreates fresh data directory with proper permissions
+- Provides clear feedback and next steps
+
 ### `./scripts/test-python.sh`
 - Tests Python installation
 - Verifies BeautifulSoup and other dependencies
@@ -175,4 +185,11 @@ docker compose restart
 ```bash
 # Fix data directory permissions
 chmod 755 data
+```
+
+### Need to reset everything
+```bash
+# Clear all data and start fresh
+./scripts/clear-db.sh
+./scripts/start.sh
 ```
